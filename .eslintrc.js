@@ -1,4 +1,12 @@
 module.exports = {
   root: true,
-  extends: "@callstack",
-};
+  parser: '@typescript-eslint/parser',
+  extends: ['@react-native-community', "@callstack"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx",".json", ".native.js"]
+      }
+    }
+  }
+}
