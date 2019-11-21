@@ -17,6 +17,7 @@ const HelloWorld = () => {
         <Text>DupaXd</Text>
       </View>
       <Button title="Go Home" onPress={() => navigate('Home')} />
+      <Button title="Log Out" onPress={() => navigate('Auth')} />
     </>
   );
 };

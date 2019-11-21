@@ -12,7 +12,7 @@ const AuthLoadingScreen = () => {
 
   useEffect(() => {
     const checkIf = async () => {
-      const username: string = 'zuck';
+      const username: string = 'xd';
       const password: string = 'poniesRgr8';
 
       await Keychain.setGenericPassword(username, password);
@@ -38,13 +38,10 @@ const AuthLoadingScreen = () => {
     <>
       <View>
         <Text>Welcome to the app</Text>
+        <Text>WTF</Text>
       </View>
     </>
   );
 };
-
-// const AuthLoading = () = > {
-
-// }
 
 export default AuthLoadingScreen;

@@ -1,11 +1,20 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import { useNavigation } from '../../hooks/navigation-hooks';
 
 const SignIn = () => {
+  const { navigate } = useNavigation();
+
   return (
     <>
       <View>
-        <Text>SignIn</Text>
+        <Text>Sign In</Text>
+        <Button
+          title="Sign In"
+          onPress={() => {
+            navigate('Login');
+          }}
+        />
       </View>
     </>
   );

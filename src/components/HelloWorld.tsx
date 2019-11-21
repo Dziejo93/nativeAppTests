@@ -8,7 +8,7 @@ const HelloWorld = () => {
   return (
     <>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
+        <Text>{`It' s still not done`}</Text>
         <Button title="Go to details" onPress={() => navigate('Other')} />
       </View>
     </>
