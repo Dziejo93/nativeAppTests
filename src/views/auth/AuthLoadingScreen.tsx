@@ -8,18 +8,18 @@ import { View, Text } from 'react-native';
 const AuthLoadingScreen = () => {
   enableScreens();
 
-  const { navigate } = useNavigation();
-
+  const { navigate, state } = useNavigation();
+  console.log(state.params);
   useEffect(() => {
     const checkIf = async () => {
-      const username: string = 'xd';
-      const password: string = 'poniesRgr8';
+      const username = 'xd';
+      const password = 'poniesRgr8';
 
       await Keychain.setGenericPassword(username, password);
       try {
         const credentialsChecked = await Keychain.getGenericPassword();
 
-        if (!credentialsChecked) {
+        if (credentialsChecked) {
           console.log('Credentials successfully loaded for user ');
           navigate('App');
         } else {
@@ -36,7 +36,7 @@ const AuthLoadingScreen = () => {
 
   return (
     <>
-      <View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Welcome to the app</Text>
         <Text>WTF</Text>
       </View>
@@ -45,3 +45,27 @@ const AuthLoadingScreen = () => {
 };
 
 export default AuthLoadingScreen;
+
+// useEffect(() => {
+//   const checkIf = async () => {
+//     const username = 'xd';
+//     const password = 'poniesRgr8';
+
+//     await Keychain.setGenericPassword(username, password);
+//     try {
+//       const credentialsChecked = await Keychain.getGenericPassword();
+
+//       if (credentialsChecked) {
+//         console.log('Credentials successfully loaded for user ');
+//         navigate('App');
+//       } else {
+//         console.log('No credentials stored');
+//         navigate('Auth');
+//       }
+//     } catch (error) {
+//       console.log("Keychain couldn't be accessed!", error);
+//       navigate('Auth');
+//     }
+//   };
+//   checkIf();
+// }, [navigate]);

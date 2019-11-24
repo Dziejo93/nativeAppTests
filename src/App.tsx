@@ -1,3 +1,3 @@
-import Authentication from './views/auth/Authentication';
+import Router from './router';
 
-export default Authentication;
+export default Router;

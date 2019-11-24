@@ -1,20 +1,19 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { useNavigation } from '../../hooks/navigation-hooks';
+import { AUTH_LOADING } from '../../router/navigation-consts';
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
   const { navigate } = useNavigation();
+  const navigateToAuthLoading = (): void => {
+    navigate(AUTH_LOADING);
+  };
 
   return (
     <>
       <View>
-        <Text>Further down the drain</Text>
-        <Button
-          title="I'm done kill me"
-          onPress={() => {
-            navigate('App');
-          }}
-        />
+        <Text>Login</Text>
+        <Button title="Log out" onPress={navigateToAuthLoading} />
       </View>
     </>
   );
