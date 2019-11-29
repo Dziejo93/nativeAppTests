@@ -3,7 +3,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   extends: ['@react-native-community', "@callstack","plugin:@typescript-eslint/recommended","prettier",],
   rules: {
-    "comma-dangle": "error",
+    "comma-dangle": "off",
   },
   "settings": {
     "import/resolver": {

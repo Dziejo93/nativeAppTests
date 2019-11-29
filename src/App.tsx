@@ -1,3 +1,14 @@
+import React from 'react';
 import Router from './router';
+import { enableScreens } from 'react-native-screens';
 
-export default Router;
+const App: React.FC = () => {
+  enableScreens();
+
+  return (
+    <>
+      <Router />
+    </>
+  );
+};
+export default App;

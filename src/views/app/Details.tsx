@@ -9,7 +9,6 @@ const Details: React.FC = () => {
   const navigateTo = (routeName: string) => (): void => {
     return navigate(routeName);
   };
-
   return (
     <>
       <View>

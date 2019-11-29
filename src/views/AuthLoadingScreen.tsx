@@ -1,43 +1,34 @@
 import React, { useEffect } from 'react';
-import { enableScreens } from 'react-native-screens';
-import { useNavigation } from '../../hooks/navigation-hooks';
-// import useIsAuthorisedHook from '../../hooks/authorisation-hooks';
+import { useNavigation } from '../hooks/navigation-hooks';
 import * as Keychain from 'react-native-keychain';
 import { View, Text } from 'react-native';
 
-const AuthLoadingScreen = () => {
-  enableScreens();
+const AuthLoadingScreen: React.FC = () => {
+  const { navigate } = useNavigation();
 
-  const { navigate, state } = useNavigation();
-  console.log(state.params);
-  useEffect(() => {
-    const checkIf = async () => {
-      const username = 'xd';
-      const password = 'poniesRgr8';
-
-      await Keychain.setGenericPassword(username, password);
+  useEffect((): void => {
+    const getUser = async (): void => {
       try {
         const credentialsChecked = await Keychain.getGenericPassword();
 
         if (credentialsChecked) {
-          console.log('Credentials successfully loaded for user ');
-          navigate('App');
-        } else {
-          console.log('No credentials stored');
-          navigate('Auth');
+          console.log(credentialsChecked);
+          return navigate('App');
         }
+
+        return navigate('Auth');
       } catch (error) {
         console.log("Keychain couldn't be accessed!", error);
-        navigate('Auth');
       }
     };
-    checkIf();
+
+    getUser();
   }, [navigate]);
 
   return (
     <>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Welcome to the app</Text>
+        <Text>Loading</Text>
         <Text>WTF</Text>
       </View>
     </>
