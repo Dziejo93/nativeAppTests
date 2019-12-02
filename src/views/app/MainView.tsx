@@ -1,22 +1,24 @@
 import React from 'react';
+import { Text, Button, Platform, SafeAreaView } from 'react-native';
 import { useNavigation } from '../../hooks/navigation-hooks';
 import { HandleAndroidBackButton } from '../../hooks/handle-android-back-button-hook';
-import { View, Text, Button, Platform } from 'react-native';
 
 const MainView: React.FC = () => {
+  if (Platform.OS === 'android') HandleAndroidBackButton();
+
   const { navigate } = useNavigation();
 
-  if (Platform.OS === 'android') HandleAndroidBackButton();
+  const navigateToDetails = (): void => {
+    navigate('Details');
+  };
 
   return (
     <>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <SafeAreaView
+        style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>{`It' s still not done`}</Text>
-        <Button
-          title="Go to details"
-          onPress={(): void => navigate('Details')}
-        />
-      </View>
+        <Button title="Go to details" onPress={navigateToDetails} />
+      </SafeAreaView>
     </>
   );
 };

@@ -12,13 +12,11 @@ const AuthLoadingScreen: React.FC = () => {
         const credentialsChecked = await Keychain.getGenericPassword();
 
         if (credentialsChecked) {
-          console.log(credentialsChecked);
           return navigate('App');
         }
-
         return navigate('Auth');
       } catch (error) {
-        console.log("Keychain couldn't be accessed!", error);
+        throw Error(error);
       }
     };
 

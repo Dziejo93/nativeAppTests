@@ -22,9 +22,9 @@ export function useNavigation<S>(): NavigationScreenProp<S & NavigationRoute> {
   const navigation = useContext(NavigationContext) as any; // TODO typing?
   if (!navigation) {
     throw new Error(
-      "react-navigation hooks require a navigation context but it couldn't be found. " +
-        "Make sure you didn't forget to create and render the react-navigation app container. " +
-        'If you need to access an optional navigation object, you can useContext(NavigationContext), which may return'
+      `react-navigation hooks require a navigation context but it couldn't be found.
+        Make sure you didn't forget to create and render the react-navigation app container. 
+        If you need to access an optional navigation object, you can useContext(NavigationContext), which may return`
     );
   }
   return navigation;
@@ -125,7 +125,7 @@ function nextFocusState(
   }
 }
 
-export function useFocusState() {
+export function useFocusState(): FocusState {
   const navigation = useNavigation();
 
   const [focusState, setFocusState] = useState<FocusState>(() => {
@@ -175,7 +175,7 @@ export const useFocusEffect = (callback: EffectCallback) => {
       isFocused = false;
     });
 
-    return () => {
+    return (): void => {
       cleanup && cleanup();
       focusSubscription.remove();
       blurSubscription.remove();
@@ -183,7 +183,7 @@ export const useFocusEffect = (callback: EffectCallback) => {
   }, [callback, navigation]);
 };
 
-export const useIsFocused = () => {
+export const useIsFocused = (): void => {
   const navigation = useNavigation();
   const getNavigation = useGetter(navigation);
   const [focused, setFocused] = useState(navigation.isFocused);
@@ -196,7 +196,7 @@ export const useIsFocused = () => {
     const blurSubscription = nav.addListener('willBlur', () =>
       setFocused(false)
     );
-    return () => {
+    return (): void => {
       focusSubscription.remove();
       blurSubscription.remove();
     };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, SafeAreaView, Button, StyleSheet } from 'react-native';
+import { SafeAreaView, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '../../hooks/navigation-hooks';
 
 const authStyles = StyleSheet.create({

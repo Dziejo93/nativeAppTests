@@ -5,6 +5,7 @@ import { LOGIN } from '../../router/navigation-consts';
 
 const SignIn: React.FC = () => {
   const { navigate } = useNavigation();
+
   const navigateToLogin = (): void => {
     navigate(LOGIN);
   };
