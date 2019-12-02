@@ -3,7 +3,7 @@ export interface MinLengthReqParamsInterface {
   minLength: number;
 }
 export interface MinLengthReqResultInterface {
-  valid: boolean;
+  invalid: boolean;
   errorMessage: string;
 }
 
@@ -12,7 +12,7 @@ const minLengthReq = ({
   minLength,
 }: MinLengthReqParamsInterface): MinLengthReqResultInterface => {
   return {
-    valid: value.length <= minLength,
+    invalid: value.length < minLength,
     errorMessage: `Input is too short`,
   };
 };

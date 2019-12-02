@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 import { Text, TextInput, StyleSheet } from 'react-native';
 import { MinLengthReqResultInterface } from '../../helpers/validations';
 
@@ -28,19 +28,19 @@ const FormInput: FC = ({
   ...otherProps
 }: FormProps) => {
   const [error, setError] = useState('');
+  const [touched, setTouched] = useState(false);
 
-  const { valid, errorMessage } = validations.minLength;
+  const { invalid, errorMessage } = validations.minLength;
 
   useEffect(() => {
-    if (valid) {
-      return (): void => {
-        setError(errorMessage);
-      };
+    if (input.length > 0 && !touched) {
+      setTouched(true);
     }
-    return (): void => {
-      setError('');
-    };
-  }, [errorMessage, input.length, valid]);
+    if (invalid && touched) {
+      return setError(errorMessage);
+    }
+    return setError('');
+  }, [addInput, errorMessage, input.length, invalid, touched]);
 
   return (
     <>

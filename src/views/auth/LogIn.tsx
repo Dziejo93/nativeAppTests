@@ -1,8 +1,7 @@
-import React, { useState, useCallback, useRef } from 'react';
-import { Text, Button, SafeAreaView, StyleSheet } from 'react-native';
+import React, { useState, useCallback, useEffect } from 'react';
+import { Text, Button, SafeAreaView } from 'react-native';
 import * as Keychain from 'react-native-keychain';
 import { useNavigation } from '../../hooks/navigation-hooks';
-import { TextInput } from 'react-native-gesture-handler';
 import FormInput from '../../components/form/form-input';
 import { minLengthReq } from '../../helpers/validations';
 
@@ -11,9 +10,10 @@ const SignIn: React.FC = () => {
 
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [valid, setFormValid] = useState(true);
 
   const authorize = useCallback(async (): void => {
-    if (username === 'Dupa' && password === 'xd') {
+    if (username === 'Good' && password === 'password') {
       await Keychain.setGenericPassword(username, password);
 
       return navigate('AuthLoading');
@@ -26,6 +26,22 @@ const SignIn: React.FC = () => {
   };
   const setPasswordFunction = (text: string): void => setPassword(text.trim());
 
+  const userNameValidations = {
+    minLength: minLengthReq({ value: username, minLength: 4 }),
+  };
+  const passwordValidations = {
+    minLength: minLengthReq({ value: password, minLength: 2 }),
+  };
+
+  useEffect(() => {
+    if (
+      !userNameValidations.minLength.invalid &&
+      !passwordValidations.minLength.invalid
+    ) {
+      setFormValid(false);
+    }
+  }, [passwordValidations.minLength, userNameValidations.minLength, valid]);
+
   return (
     <>
       <SafeAreaView>
@@ -34,9 +50,7 @@ const SignIn: React.FC = () => {
           title="Username"
           input={username}
           addInput={setUserNameFunction}
-          validations={{
-            minLength: minLengthReq({ value: username, minLength: 5 }),
-          }}
+          validations={userNameValidations}
           autoCapitalize="none"
         />
         <FormInput
@@ -45,11 +59,9 @@ const SignIn: React.FC = () => {
           secureTextEntry={true}
           input={password}
           addInput={setPasswordFunction}
-          validations={{
-            minLength: minLengthReq({ value: password, minLength: 5 }),
-          }}
+          validations={passwordValidations}
         />
-        <Button title="Log In" onPress={authorize} />
+        <Button title="Log In" disabled={valid} onPress={authorize} />
       </SafeAreaView>
     </>
   );
