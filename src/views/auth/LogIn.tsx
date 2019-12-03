@@ -3,6 +3,7 @@ import { Text, Button, SafeAreaView } from 'react-native';
 import * as Keychain from 'react-native-keychain';
 import { useNavigation } from '../../hooks/navigation-hooks';
 import FormInput from '../../components/form/form-input';
+import ErrorMessage from '../../components/form/error-message';
 import { minLengthReq } from '../../helpers/validations';
 
 const SignIn: React.FC = () => {
@@ -62,6 +63,7 @@ const SignIn: React.FC = () => {
           validations={passwordValidations}
         />
         <Button title="Log In" disabled={valid} onPress={authorize} />
+        <ErrorMessage visible={valid} errorMessageString={'Bad costam'} />
       </SafeAreaView>
     </>
   );

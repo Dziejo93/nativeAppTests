@@ -1,6 +1,7 @@
-import React, { FC, useState, useEffect, useRef } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Text, TextInput, StyleSheet } from 'react-native';
 import { MinLengthReqResultInterface } from '../../helpers/validations';
+import ErrorMessage from './error-message';
 
 const styles = StyleSheet.create({
   textInput: { backgroundColor: 'grey' },
@@ -51,7 +52,7 @@ const FormInput: FC = ({
         style={styles.textInput}
         {...otherProps}
       />
-      <Text style={styles.errorMessage}> {error} </Text>
+      <ErrorMessage visible={error} errorMessageString={error} />
     </>
   );
 };

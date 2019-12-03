@@ -13,7 +13,7 @@ const minLengthReq = ({
 }: MinLengthReqParamsInterface): MinLengthReqResultInterface => {
   return {
     invalid: value.length < minLength,
-    errorMessage: `Input is too short`,
+    errorMessage: 'Input is too short',
   };
 };
 
