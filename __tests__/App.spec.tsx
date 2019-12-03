@@ -6,8 +6,8 @@ import { render } from 'react-native-testing-library';
 
 describe('testing describe', () => {
   it('renders correctly', () => {
-    const { getAllByType } = render(<App />);
+    const wrapper = render(<App />);
 
-    // expect(getAllByType('Router')).toBeDefined();
+    expect(wrapper.toJSON()).toBeDefined();
   });
 });

@@ -4,7 +4,10 @@ import * as Keychain from 'react-native-keychain';
 import { useNavigation } from '../../hooks/navigation-hooks';
 import FormInput from '../../components/form/form-input';
 import ErrorMessage from '../../components/form/error-message';
-import { minLengthReq } from '../../helpers/validations';
+import {
+  minLengthReq,
+  testIncludesAValidator,
+} from '../../helpers/validations';
 
 const SignIn: React.FC = () => {
   const { navigate } = useNavigation();
@@ -29,6 +32,7 @@ const SignIn: React.FC = () => {
 
   const userNameValidations = {
     minLength: minLengthReq({ value: username, minLength: 4 }),
+    inputHasA: testIncludesAValidator({ value: username }),
   };
   const passwordValidations = {
     minLength: minLengthReq({ value: password, minLength: 2 }),

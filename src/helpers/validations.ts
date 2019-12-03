@@ -2,7 +2,11 @@ export interface MinLengthReqParamsInterface {
   value: string;
   minLength: number;
 }
-export interface MinLengthReqResultInterface {
+export interface TestIncludesAValidatorInterface {
+  value: string;
+}
+
+export interface ResultInterface {
   invalid: boolean;
   errorMessage: string;
 }
@@ -10,11 +14,17 @@ export interface MinLengthReqResultInterface {
 const minLengthReq = ({
   value,
   minLength,
-}: MinLengthReqParamsInterface): MinLengthReqResultInterface => {
+}: MinLengthReqParamsInterface): ResultInterface => {
   return {
     invalid: value.length < minLength,
     errorMessage: 'Input is too short',
   };
 };
 
-export { minLengthReq };
+const testIncludesAValidator = ({
+  value,
+}: TestIncludesAValidatorInterface): ResultInterface => {
+  return { invalid: value.includes('a'), errorMessage: 'Input has a' };
+};
+
+export { minLengthReq, testIncludesAValidator };

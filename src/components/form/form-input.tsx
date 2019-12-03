@@ -31,7 +31,14 @@ const FormInput: FC = ({
   const [error, setError] = useState('');
   const [touched, setTouched] = useState(false);
 
-  const { invalid, errorMessage } = validations.minLength;
+  const invalidEntry = Object.keys(validations).find(validation => {
+    if (validations[validation].invalid) {
+      return validation;
+    }
+  });
+
+  const { invalid = false, errorMessage = '' } =
+    validations[invalidEntry] || {};
 
   useEffect(() => {
     if (input.length > 0 && !touched) {

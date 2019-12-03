@@ -27,7 +27,7 @@ const AuthLoadingScreen: React.FC = () => {
     <>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Loading</Text>
-        <Text>WTF</Text>
+        <Text>Hello</Text>
       </View>
     </>
   );
