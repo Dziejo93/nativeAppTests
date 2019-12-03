@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Text, TextInput, StyleSheet } from 'react-native';
-import { MinLengthReqResultInterface } from '../../helpers/validations';
+import { ResultInterface } from '../../helpers/validations';
 import ErrorMessage from './error-message';
 
 const styles = StyleSheet.create({
@@ -11,23 +11,21 @@ const styles = StyleSheet.create({
 export interface FormProps {
   title: string;
   input: string;
-  addInput: void;
+  addInput: (text: string) => void;
   validations: {
-    minLength: MinLengthReqResultInterface;
+    minLength: ResultInterface;
   };
-  otherProps: {
-    autoCapitalize: string;
-    secureTextEntry: boolean;
-  };
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
+  secureTextEntry?: boolean;
 }
 
-const FormInput: FC = ({
+const FormInput: FC<FormProps> = ({
   title,
   addInput,
   input,
   validations,
   ...otherProps
-}: FormProps) => {
+}) => {
   const [error, setError] = useState('');
   const [touched, setTouched] = useState(false);
 
@@ -59,7 +57,7 @@ const FormInput: FC = ({
         style={styles.textInput}
         {...otherProps}
       />
-      <ErrorMessage visible={error} errorMessageString={error} />
+      <ErrorMessage visible={!!error} errorMessageString={error} />
     </>
   );
 };

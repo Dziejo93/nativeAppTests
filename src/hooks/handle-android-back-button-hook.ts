@@ -2,11 +2,10 @@ import { useFocusEffect } from './navigation-hooks';
 import { BackHandler } from 'react-native';
 import { useCallback } from 'react';
 
-export const HandleAndroidBackButton = (): boolean => {
+export const HandleAndroidBackButton = (): void => {
   useFocusEffect(
     useCallback(() => {
-      const blockBackHandler = (): void => {
-        console.log('handler');
+      const blockBackHandler = (): boolean => {
         return true;
       };
 

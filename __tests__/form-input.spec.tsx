@@ -2,9 +2,10 @@ import 'react-native';
 import React from 'react';
 import FormInput from '../src/components/form/form-input';
 
-import { render } from 'react-native-testing-library';
+import { render, RenderAPI } from 'react-native-testing-library';
 
-const factory = settings => render(<FormInput {...settings} />);
+const factory = (settings: any): RenderAPI =>
+  render(<FormInput {...settings} />);
 
 describe('testing describe', () => {
   it('renders correctly', () => {

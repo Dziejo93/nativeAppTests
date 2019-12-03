@@ -7,7 +7,7 @@ const AuthLoadingScreen: React.FC = () => {
   const { navigate } = useNavigation();
 
   useEffect((): void => {
-    const getUser = async (): void => {
+    const getUser = async (): Promise<any> => {
       try {
         const credentialsChecked = await Keychain.getGenericPassword();
 

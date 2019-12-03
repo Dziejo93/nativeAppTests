@@ -16,7 +16,7 @@ const SignIn: React.FC = () => {
   const [username, setUsername] = useState('');
   const [valid, setFormValid] = useState(true);
 
-  const authorize = useCallback(async (): void => {
+  const authorize = useCallback(async (): Promise<boolean> => {
     if (username === 'Good' && password === 'password') {
       await Keychain.setGenericPassword(username, password);
 
