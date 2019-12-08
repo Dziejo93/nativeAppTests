@@ -1,9 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addUser } from '../../redux/actions/userActions';
 import { Text, Button, Platform, SafeAreaView } from 'react-native';
 import { useNavigation } from '../../hooks/navigation-hooks';
 import { HandleAndroidBackButton } from '../../hooks/handle-android-back-button-hook';
 
-const MainView: React.FC = () => {
+export interface StoreProps {
+  user: string;
+  dispatchAddUser: (user: string) => void;
+}
+
+const MainView: React.FC<StoreProps> = ({ user, dispatchAddUser }) => {
   if (Platform.OS === 'android') HandleAndroidBackButton();
 
   const { navigate } = useNavigation();
@@ -16,11 +24,26 @@ const MainView: React.FC = () => {
     <>
       <SafeAreaView
         style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>{`It' s still not done`}</Text>
+        <Text>{user}</Text>
+        <Button title="change" onPress={(): void => dispatchAddUser('sumo')} />
         <Button title="Go to details" onPress={navigateToDetails} />
       </SafeAreaView>
     </>
   );
 };
 
-export default MainView;
+const mapStateToProps = state => {
+  const { user } = state;
+
+  return { user };
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      dispatchAddUser: addUser,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainView);
