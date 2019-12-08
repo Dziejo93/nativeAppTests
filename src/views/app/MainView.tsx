@@ -20,13 +20,14 @@ const MainView: React.FC<StoreProps> = ({ user, dispatchAddUser }) => {
   const navigateToDetails = (): void => {
     navigate('Details');
   };
+  const addUserHandler = (): void => dispatchAddUser('sumo');
 
   return (
     <>
       <SafeAreaView
         style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>{user}</Text>
-        <Button title="change" onPress={(): void => dispatchAddUser('sumo')} />
+        <Button title="change" onPress={addUserHandler} />
         <Button title="Go to details" onPress={navigateToDetails} />
       </SafeAreaView>
     </>
