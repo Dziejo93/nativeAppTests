@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { addUser } from '../../redux/actions/userActions';
 import { Text, Button, Platform, SafeAreaView } from 'react-native';
 import { useNavigation } from '../../hooks/navigation-hooks';
 import { HandleAndroidBackButton } from '../../hooks/handle-android-back-button-hook';
+import { State } from '../../redux/initialState';
 
 export interface StoreProps {
-  user: string;
+  user?: string;
   dispatchAddUser: (user: string) => void;
 }
 
@@ -32,13 +33,13 @@ const MainView: React.FC<StoreProps> = ({ user, dispatchAddUser }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: State) => {
   const { user } = state;
 
   return { user };
 };
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       dispatchAddUser: addUser,
